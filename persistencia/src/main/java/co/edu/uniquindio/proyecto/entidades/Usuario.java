@@ -6,7 +6,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Map;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -14,7 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Persona implements Serializable {
+public class Usuario implements Serializable {
     @Id
     @EqualsAndHashCode.Include
     @Column(length = 10)
@@ -31,7 +30,11 @@ public class Persona implements Serializable {
     @Column(nullable = false)
     private GeneroPersona genero;
 
-    public Persona(String cedula, String nombre, String email) {
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Ciudad ciudad;
+
+    public Usuario(String cedula, String nombre, String email) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.email = email;
