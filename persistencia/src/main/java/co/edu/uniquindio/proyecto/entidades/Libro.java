@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -32,6 +33,10 @@ public class Libro implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false,length = 20)
     private GeneroLibro genero;
+    @ManyToMany(mappedBy = "libros")
+    private List<Prestamo> prestamos;
+    @ManyToMany
+    private List<Autor> autores;
 
     public Libro(String isbn, String nombre, Integer unidades, Integer anio) {
         this.isbn = isbn;
