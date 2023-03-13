@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import java.util.Map;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class Usuario extends Persona implements Serializable{
 
     @Column(nullable = false,unique = true,length = 120)
@@ -25,6 +26,13 @@ public class Usuario extends Persona implements Serializable{
     @JoinColumn(nullable = false)
     private Ciudad ciudad;
     @OneToMany(mappedBy = "usuarioPrestamo")
+    @ToString.Exclude
     private List<Prestamo> prestamos;
 
+    public Usuario(String codigo, String nombre, LocalDate fechaNacimiento, GeneroPersona genero, String email, Map<String, String> numTelefonos, Ciudad ciudad) {
+        super(codigo, nombre, fechaNacimiento, genero);
+        this.email = email;
+        this.numTelefonos = numTelefonos;
+        this.ciudad = ciudad;
+    }
 }

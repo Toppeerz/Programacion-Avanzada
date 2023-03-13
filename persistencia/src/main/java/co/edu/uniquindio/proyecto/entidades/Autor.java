@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true)
 
 public class Autor extends Persona implements Serializable {
 
@@ -23,7 +24,11 @@ public class Autor extends Persona implements Serializable {
     @Column(nullable = false)
     private Integer anioNacimiento;
     @ManyToMany(mappedBy = "autores")
+    @ToString.Exclude
     private List<Libro> libros;
 
-
+    public Autor(String codigo, String nombre, LocalDate fechaNacimiento, GeneroPersona genero, Integer anioNacimiento) {
+        super(codigo, nombre, fechaNacimiento, genero);
+        this.anioNacimiento = anioNacimiento;
+    }
 }

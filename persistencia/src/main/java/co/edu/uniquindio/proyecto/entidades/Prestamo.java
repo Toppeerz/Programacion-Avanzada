@@ -32,7 +32,12 @@ public class Prestamo implements Serializable {
     @JoinColumn(nullable = false)
     private Usuario usuarioPrestamo;
     @ManyToMany
+    @ToString.Exclude
     private List<Libro> libros;
 
-
+    public Prestamo(LocalDate fechaDevolucion, Usuario usuarioPrestamo, List<Libro> libros) {
+        this.fechaDevolucion = fechaDevolucion;
+        this.usuarioPrestamo = usuarioPrestamo;
+        this.libros = libros;
+    }
 }

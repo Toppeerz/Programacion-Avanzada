@@ -34,16 +34,18 @@ public class Libro implements Serializable {
     @Column(nullable = false,length = 20)
     private GeneroLibro genero;
     @ManyToMany(mappedBy = "libros")
+    @ToString.Exclude
     private List<Prestamo> prestamos;
     @ManyToMany
+    @ToString.Exclude
     private List<Autor> autores;
 
-    public Libro(String isbn, String nombre, Integer unidades, Integer anio) {
+    public Libro(String isbn, String nombre, Integer unidades, Integer anio, GeneroLibro genero, List<Autor> autores) {
         this.isbn = isbn;
         this.nombre = nombre;
         this.unidades = unidades;
         this.anio = anio;
+        this.genero = genero;
+        this.autores = autores;
     }
-
-
 }
